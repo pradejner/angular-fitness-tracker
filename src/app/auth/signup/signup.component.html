@@ -1,0 +1,84 @@
+<section class="signup-form">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="Email"
+        ngModel
+        name="email"
+        email
+        required
+        #emailInput="ngModel"
+      />
+      <mat-error
+        *ngIf="!emailInput.hasError('required') && emailInput.hasError('email')"
+        >Email is <b>invalid</b>
+      </mat-error>
+      <mat-error *ngIf="emailInput.hasError('required')"
+        >Email is <b>required</b></mat-error
+      >
+    </mat-form-field>
+    <mat-form-field hintLabel="Must be at least 8 characters long.">
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        ngModel
+        name="password"
+        required
+        minlength="8"
+        #pwInput="ngModel"
+      />
+      <mat-hint align="end">{{ pwInput.value?.length }} / 8</mat-hint>
+      <mat-error
+        *ngIf="pwInput.hasError('minlength') && !pwInput.hasError('required')"
+        >Password is <b>too short</b></mat-error
+      >
+      <mat-error *ngIf="pwInput.hasError('required')"
+        >Password is <b>required</b></mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Birthday"
+        [matDatepicker]="birthdayPicker"
+        [max]="maxDate"
+        ngModel
+        name="birthdate"
+        required
+        #birthdate="ngModel"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="birthdayPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #birthdayPicker></mat-datepicker>
+      <mat-error *ngIf="!birthdate.hasError('required')"
+        >Must be at least <b>18 years old</b></mat-error
+      >
+      <mat-error *ngIf="birthdate.hasError('required')"
+        >Birthday is <b>required</b></mat-error
+      >
+    </mat-form-field>
+    <mat-checkbox ngModel name="agree" required color="primary"
+      >Agree to Terms and Conditions</mat-checkbox
+    >
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="f.invalid"
+    >
+      Confirm
+    </button>
+  </form>
+</section>
