@@ -17,11 +17,6 @@ export class TrainingComponent implements OnInit {
     this.exerciseSubscription = this.trainingService.exerciseChanged.subscribe(
       ex => {
         this.ongoingTraining = (ex !== null);
-        // if (ex) {
-        //   this.ongoingTraining = true;
-        // } else {
-        //   this.ongoingTraining = false;
-        // }
       });
   }
 
