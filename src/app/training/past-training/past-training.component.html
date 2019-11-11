@@ -4,8 +4,8 @@
     </mat-form-field>
 </div>
 
-<div fxLayoutAlign="center center">
-    <mat-table [dataSource]="dataSource" matSort fxFlex="90%">
+<div fxLayout="column" fxLayoutAlign="center center">
+    <mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.date | date }}</mat-cell>
@@ -34,4 +34,6 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
+
+    <mat-paginator [pageSize]="1" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
