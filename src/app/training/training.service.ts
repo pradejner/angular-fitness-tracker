@@ -1,6 +1,8 @@
 import { Exercise } from './exercise.model';
 
 export class TrainingService {
+    private currentExercise: Exercise;
+
     private availableExercises: Exercise[] = [
         {
             exerciseId: 'crunches',
@@ -42,5 +44,10 @@ export class TrainingService {
 
     getAvailableExercises() {
         return this.availableExercises.slice();
+    }
+
+    startExercise(selectedId: string) {
+        const selectedExercise = this.availableExercises.find(ex => ex.exerciseId === selectedId);
+        this.currentExercise = selectedExercise;
     }
 }
