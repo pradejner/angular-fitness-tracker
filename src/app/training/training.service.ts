@@ -1,7 +1,9 @@
 import { Exercise } from './exercise.model';
+import { Subject } from 'rxjs';
 
 export class TrainingService {
     private currentExercise: Exercise;
+    exerciseChanged = new Subject<Exercise>();
 
     private availableExercises: Exercise[] = [
         {
@@ -49,5 +51,11 @@ export class TrainingService {
     startExercise(selectedId: string) {
         const selectedExercise = this.availableExercises.find(ex => ex.exerciseId === selectedId);
         this.currentExercise = selectedExercise;
+
+        this.exerciseChanged.next({...this.currentExercise});
+    }
+
+    getCurrentExercise() {
+        return {...this.currentExercise};
     }
 }
